@@ -1,8 +1,8 @@
 local force = {}
-force.PrintName = "Cool Force Power"
-force.Author = "YOU"
-force.Description = "force template"
-force.id = "myforcepower" -- lowercase only
+force.PrintName = "Force Choke"
+force.Author = "Eric"
+force.Description = "Harder."
+force.id = "chokeanakin" -- lowercase only
 --force.Spawnable = false  -- uncomment to unlist in q-menu
 
 --[[
@@ -23,13 +23,13 @@ end
 force.StartUse = function( ply )
 	if ply:lscsGetForce() < 5 then return end -- do we have enough force points ?
 
-	-- if hook.Run( "LSCS:PlayerCanManipulate", ply, target_entity, false ) then return end  -- if you are making a forcepower that can manipulate other ents, run this hook to check if the other player has force block.
+	if hook.Run( "LSCS:PlayerCanManipulate", ply, target_entity, false ) then return end  -- if you are making a forcepower that can manipulate other ents, run this hook to check if the other player has force block.
 
 	ply:lscsTakeForce( 5 ) -- take amount of force we need
 
-	ply:EmitSound("npc/combine_gunship/ping_search.wav")
+	ply:EmitSound("wos/icefuse/choke_start.wav")
 
-	LSCS:PlayVCDSequence( ply, "gesture_signal_halt", 0 ) -- play animation
+	LSCS:PlayVCDSequence( ply, "wos_cast_choke", 0 ) -- play animation
 end
 
 force.StopUse = function( ply )
